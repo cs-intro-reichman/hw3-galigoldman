@@ -45,10 +45,10 @@ public class Algebra {
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		int result=x1, i=0;
-		for(i=0; i<x2-1; i++)
+		int result=0, i=0;
+		for(i=0; i<x2; i++)
 		{
-			result=plus(result, x2);
+			result=plus(result, x1);
 		}
 		return result;
 	}
@@ -66,8 +66,8 @@ public class Algebra {
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
 		int num=x1, count=0;
-		while (num>0 && num>x2) {
-			num=minus(x1, x2);
+		while (num>0 && (num>x2 || num == x2)) {
+			num=minus(num, x2);
 			count++;
 		}
 		return count;
@@ -76,8 +76,8 @@ public class Algebra {
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
 		int num=x1;
-		while (num>0 && num>x2) {
-			x1=minus(x1, x2);
+		while (num>0 && (num>x2 || num == x2 )) {
+			num=minus(num, x2);
 		}
 		return num;
 	}	
@@ -85,9 +85,14 @@ public class Algebra {
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
 		int num=1;
-		while (times(num, num)!=x) {
+		while (times(num, num)<x) {
 			num++;
 		}
-		return num;
+		if(times(num, num)==x)
+		{
+			return num;
+		}
+		else
+			return num-1;
 	}	  	  
 }
