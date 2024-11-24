@@ -60,7 +60,20 @@ public class Algebra {
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		int result=0, i=0;
+		int result=0, i=0, temp;
+		if(x1>0 && x2<0){
+			temp=x2;
+			x2=x1;
+			x1=temp;
+		}
+		if(x1<0 && x2<0){
+			x1= minus(0, x1);
+			x2= minus(0, x2);
+		}
+		if(x1==0 || x2==0){
+			return 0;
+		}
+
 		for(i=0; i<x2; i++)
 		{
 			result=plus(result, x1);
@@ -81,9 +94,29 @@ public class Algebra {
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
 		int num=x1, count=0;
+		boolean neg=false;
+		if(x1<0){
+			if(x2<0){
+				x1=minus(0, x1);
+				x2=minus(0, x2);
+			}
+			if(x2>0){
+				x1=minus(0, x1);
+				neg=true;
+			}
+		}
+		if(x2<0){
+			if(x1>0){
+				x2=minus(0, x2);
+				neg=true;
+			}
+		}
 		while (num>0 && (num>x2 || num == x2)) {
 			num=minus(num, x2);
 			count++;
+		}
+		if(neg){
+			return minus(0, count);
 		}
 		return count;
 	}

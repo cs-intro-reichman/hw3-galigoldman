@@ -42,18 +42,20 @@ public class Anagram {
 		int l2 = str2.length();
 		String[] string2 = str2.split("");
 		int i=0,j=0;
+		boolean find=false;
 			for(i=0; i<l1 ;i++){
 				if(!isPunctuation(string1[i])){
 					while (j<l2) {
 						if(!isPunctuation(string2[j])){
-							if(!isSame(string1[i], string2[j])){
-								return false;
-							}
-							else{
+							if(isSame(string1[i], string2[j])){
+								find=true;
 								string2[j]="";
 							}
 						}
 						j++;
+					}
+					if(!find){
+						return false;
 					}
 					j=0;
 				}
