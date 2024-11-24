@@ -38,8 +38,11 @@ public class Anagram {
 	}
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		if (str1 == null || str2 == null || str1.isEmpty() || str2.isEmpty()) {
+		if (str1 == null || str2 == null) {
 			return false; 
+		}
+		if (str1.isEmpty() && str2.isEmpty()){
+			return true;
 		}
 		String[] string1 = str1.split("");
 		int l1 = str1.length();
@@ -78,12 +81,17 @@ public class Anagram {
 	public static String preProcess(String str) {
 		// Replace the following statement with your code
 		String[] string1 = str.split("");
+		if (str == null || str.isEmpty()) return str;
 		String[] string2 = new String[string1.length];
 		String result="";
 		int i,j=0;
 		for(i=0; i<string1.length; i++){
 			if(!isPunctuation(string1[i])){
 				string2[j]=string1[i].toLowerCase();
+				j++;
+			}
+			if(string1[i].equals(" ")){
+				string2[j]=string1[i];
 				j++;
 			}
 		}
