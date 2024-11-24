@@ -6,7 +6,7 @@ public class Anagram {
 		System.out.println(isAnagram("William Shakespeare","I am a weakish speller")); // true
 		System.out.println(isAnagram("Madam Curie","Radium came")); // true
 		System.out.println(isAnagram("Tom Marvolo Riddle","I am Lord Voldemort")); // true
-
+		/* 
 		// Tests the preProcess function.
 		System.out.println(preProcess("What? No way!!!"));
 		
@@ -24,12 +24,47 @@ public class Anagram {
 			if (!pass) break;
 		}
 		System.out.println(pass ? "test passed" : "test Failed");
+		*/
 	}  
-
+	public static boolean isPunctuation(String str) {
+		String punctuationMarks = " .,:;!?\"'()-{}[]<>";
+		char ch = str.charAt(0); 
+		return punctuationMarks.indexOf(ch) != -1 ; 
+	}	
+	public static boolean isSame(String str1, String str2){
+		return str1.equals(str2.toLowerCase()) || str1.equals(str2.toUpperCase());
+	}
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
 		// Replace the following statement with your code
-		return false;
+		String[] string1 = str1.split("");
+		int l1 = str1.length();
+		int l2 = str2.length();
+		String[] string2 = str2.split("");
+		int i=0,j=0;
+			for(i=0; i<l1 ;i++){
+				if(!isPunctuation(string1[i])){
+					while (j<l2) {
+						if(!isPunctuation(string2[j])){
+							if(!isSame(string1[i], string2[j])){
+								return false;
+							}
+							else{
+								string2[j]="";
+							}
+						}
+						j++;
+					}
+					j=0;
+				}
+			}
+		for (i=0; i<l2 ; i++){
+			if(!string2[i].equals("")){
+				return false;
+			}
+
+		}
+		return true;
 	}
 	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted

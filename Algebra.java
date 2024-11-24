@@ -26,9 +26,17 @@ public class Algebra {
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
 		int result=x1, i=0;
-		for(i=0; i<x2; i++)
-		{
-			result++;
+		if(x2>0){
+			for(i=0; i<x2; i++)
+			{
+					result++;
+			}
+		}
+		if(x2<0){
+			for(i=0; i<(minus(0, x2)); i++)
+			{
+					result--;
+			}
 		}
 		return result;
 	}
@@ -36,9 +44,16 @@ public class Algebra {
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
 		int result=x1, i=0;
-		for(i=0; i<x2; i++)
-		{
-			result--;
+		if(x2>0){
+			for(i=0; i<x2; i++)
+			{
+				result--;
+			}
+		}
+		if(x2<0){
+			for(i=x2;i<0;i++){
+				result++;
+			}
 		}
 		return result;
 	}
